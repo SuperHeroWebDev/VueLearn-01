@@ -1,0 +1,254 @@
+@import './normalize.scss';
+@import './animate.scss';
+
+/* color pallet */
+$bg: #ffeead;
+$bg2: #fff;
+$border: hsl(0, 0%, 65%);
+$border2: hsl(0, 0%, 87%);
+$font: hsl(0, 0%, 87%);
+$font2: hsl(0, 0%, 40%);
+$font3: hsl(0, 0%, 10%);
+$primary: hsl(153, 65%, 72%);
+$primary2: hsl(153, 65%, 52%);
+$primary3: hsl(153, 65%, 92%);
+
+/* breakpoints */
+$large: 1200px;
+$medium: 768px;
+
+/* font */
+
+h1, h2, h3, p {
+  color: $font2;
+}
+
+p {
+  line-height: 1.5rem;
+}
+
+a {
+  color: $font2;
+  text-decoration: none;
+}
+
+q {
+  color: $font2;
+  text-align: center;
+  display: block;
+  line-height: 1.5rem;
+  max-width: 50ch;
+}
+
+.quote-refresh {
+  cursor: pointer;  
+}
+
+.swal-button--confirm {
+  background-color: $primary;
+}
+
+
+.swal-modal {
+  -webkit-animation: none !important;
+  animation: none !important;
+}
+
+html, body {
+  font-size: 16px;
+  background-color: $bg;
+  box-sizing: border-box;
+  font-family: 'Source Sans Pro', sans-serif;
+  min-width: 300px;
+}
+
+.wrapper {
+  background-color: white;
+  max-width: $large;
+  margin: 2rem auto;
+  border: 1px solid $border;
+}
+
+header, main, footer {
+  border-bottom: 1px solid $border2;
+}
+
+header {
+  padding: 6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    color: $primary2;
+    font-weight: 200;
+    font-size: 4rem;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+}
+
+nav {
+  background-color: $primary;
+  ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 1rem 0;
+    margin: 0;
+    text-align: center;
+  }
+  li {
+    flex-basis: 130px;
+  }
+  .router-link-active {
+    color: $font3;
+    font-weight: 600;
+  }
+  a:hover {
+    color: $font3;
+    font-weight: 600;
+  }
+}
+
+main {
+  padding: 1.5rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  .blog {
+    padding: 1rem 2.5rem;
+    margin: 1.5rem;
+    flex-basis: 36%;
+    border: 1px solid $border2;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      background-color: $primary3;
+      border: 1px solid $primary3;
+    }
+  }
+}
+
+#add-blog{
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    > div {
+        border: 1px solid $border;
+        padding: 1.5rem 3rem;
+        width: 50%;
+        overflow: hidden;
+    }
+    hr {
+        margin: 3rem 0;
+        border: 1px solid $border;
+    }
+    form {
+        input, textarea, select {
+            font-family: 'Source Sans Pro', sans-serif;                                
+        }
+        label {
+            font-size: 1rem;
+            line-height: 3rem;
+        }
+        input[type="text"] {
+            display: block;
+            box-sizing: border-box;            
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        textarea {
+            box-sizing: border-box;            
+            padding: 0.5rem;
+            font-size: 1rem;            
+            display: block;
+            width: 100%;
+            height: 160px;
+            max-width: 100%;
+            max-height: 600px;
+        }
+        #checkbox {
+          input, label {
+            display: inline-block;
+            margin-right: 1rem;
+          }
+        }
+        select {
+            margin-left: 0.5rem;
+        }
+
+    }
+    #preview {
+        word-break: break-all;         
+        h3 {
+            color: $primary;            
+        }
+        .gray {
+            color: $font2;
+        }
+    }
+    button {
+        background-color: $font;
+        font-size: 0.8rem;
+        display: block;
+        margin: 1.5rem auto;
+        padding: 0.5rem 1rem;
+        border-radius: 2px;
+        border: 1px solid $border;
+        color: $font2;
+        font-weight: 600;
+        cursor: pointer;
+        &:hover {
+            background-color: $primary;
+            color: white;
+        }
+    }
+    #submitted {
+        text-align: center;
+    }
+
+}
+
+footer {
+  background-color: $primary;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  p {
+    margin: 0;
+    padding: 1rem 0;
+  }
+  a {
+    text-decoration: underline;    
+  }
+}
+
+@media only screen and (max-width: $medium) {
+  .wrapper {
+    margin: 0 auto;
+  }
+  #add-blog {
+    width: 100%;
+    margin: 0;
+    padding: 10px 0;
+    > div {
+      padding: 10px;
+      width: 100%;
+      margin: 10px;
+    }
+  }
+  main {
+    .blog {
+      flex-basis: 100%;
+      margin:0;
+    }
+    h2 {
+      text-align: left;
+    }
+  }
+}
