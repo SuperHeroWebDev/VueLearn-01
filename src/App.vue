@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
       <app-header></app-header>
-      <app-nav></app-nav>
-      <filters></filters>
+      <app-nav v-on:routeState="reciveData($event)"></app-nav>
+      <filters v-if="routeState"></filters>
       <transition name="addBlog">
         <router-view>
           <spinner></spinner>
@@ -34,10 +34,14 @@ export default {
   },
   data () {
     return {
-      show: false
+      routeState: true
     }
   },
-
+  methods: {
+    reciveData: function(par){
+      this.routeState = par;
+    }
+  }
 }
 </script>
 
@@ -58,5 +62,3 @@ export default {
 }
 
 </style>
-
-

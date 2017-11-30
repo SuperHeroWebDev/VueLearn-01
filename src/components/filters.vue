@@ -2,21 +2,34 @@
     <div id="filters">
         <div class="nav-button" v-on:click="openNav = !openNav; navBtn = !navBtn;" v-bind:class="{navBtnActive: navBtn}"></div>
         <div class="filters-area" v-bind:class="{openNav: openNav}">
-            <select name="" id="">
-                <option value="">select category</option>
+            <select v-model="selectedSection" v-on:click="sendSelectionFun()">
+                <option v-for="section in sections">{{section}}</option>
             </select>
-            <input type="text" placeholder="search blogs">
+            <input v-model="search" type="text" placeholder="search blogs">
         </div>
     </div>
 </template>
 
 <script>
+import {bus} from '../main.js';
+
 export default {
   data() {
       return {
           openNav: true,
-          navBtn: false
+          navBtn: false,
+          search: '',
+          selectedSection: 'home',
+          sections: ['home', 'arts', 'automobiles', 'books', 'business', 'fashion', 'food', 'health', 'insider', 'magazine', 'movies', 'national', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 'tmagazine', 'travel', 'upshot', 'world']
       }
+  },
+  methods: {
+      sendSelectionFun: function() {
+            bus.$emit('sendSection', this.selectedSection);
+      },
+      sendSearch: function() {
+            console.log(this.search);
+      },
   }
 }
 </script>
@@ -26,20 +39,22 @@ export default {
 #filters {
     width: 100%;
     position: relative;
-    margin-bottom: 3rem;
     .nav-button {
-        height: 20px;
+        height: 10px;
         width: 80px;
-        background-color: hsl(0, 0%, 87%);
+        background-color: #4C7F68;
         border-radius: 0 0 4px 4px;
         position: absolute;
-        bottom: -20px;
+        bottom: -12px;
         left: 50%;
         margin-left: -40px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
+        border: 1px solid hsl(0, 0%, 65%);
+        border-top-color: transparent;
         &:hover {
         background-color: hsl(153, 65%, 72%);
+        
         }
     }
     .navBtnActive {
@@ -70,7 +85,7 @@ export default {
     }
 
     .openNav {
-        transform: scaleY(0);
+        opacity: 0;
         visibility: hidden;
         position: absolute;
         width: 100%;

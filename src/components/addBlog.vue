@@ -8,6 +8,7 @@
                 </div>
 
                 <form v-show="!submitted">
+                    <h2 class="center">Add</h2>
                     <label for="title">Title:</label>
                     <input v-model.lazy="blog.title" type="text" id="title" required>
                     <label for="content">Content:</label>
@@ -31,6 +32,7 @@
                 </form>
                 <hr>
                 <div v-show="!submitted" id="preview">
+                    <h2  class="center">Preview</h2>
                     <h3>Title:</h3>
                     <h3 class="gray">{{blog.title}}</h3>
                     <h3>Content:</h3>
@@ -94,7 +96,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+.center {
+        text-align: center;
+    }
 
 </style>
 
