@@ -1,5 +1,6 @@
 <template>
   <main>
+      <h1>{{category}}</h1>
       <div class="blog" v-for="blog in processedPosts">
         <div class="image" v-bind:style="{ backgroundImage: 'url(' + blog.image_url + ')'}"></div>
         <h2>{{blog.title}}</h2>
@@ -23,10 +24,16 @@ export default {
         return {
             blogs: [],
             spinner: true,
+            category: 'home'
         }
     },
     created() {
-        this.getPosts('home');
+        bus.$on('sendSectionEmit', (data) => {
+            this.category = data;
+        });
+
+        getPosts(this.category);
+
     },
     methods: {
         getPosts(section) {

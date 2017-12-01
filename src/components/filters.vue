@@ -2,8 +2,8 @@
     <div id="filters">
         <div class="nav-button" v-on:click="openNav = !openNav; navBtn = !navBtn;" v-bind:class="{navBtnActive: navBtn}"></div>
         <div class="filters-area" v-bind:class="{openNav: openNav}">
-            <select v-model="selectedSection" v-on:click="sendSelectionFun()">
-                <option v-for="section in sections">{{section}}</option>
+            <select v-model="selectedSection">
+                <option v-for="section in sendSelectionFun">{{section}}</option>
             </select>
             <input v-model="search" type="text" placeholder="search blogs">
         </div>
@@ -23,13 +23,12 @@ export default {
           sections: ['home', 'arts', 'automobiles', 'books', 'business', 'fashion', 'food', 'health', 'insider', 'magazine', 'movies', 'national', 'nyregion', 'obituaries', 'opinion', 'politics', 'realestate', 'science', 'sports', 'sundayreview', 'technology', 'theater', 'tmagazine', 'travel', 'upshot', 'world']
       }
   },
-  methods: {
+  computed: {
       sendSelectionFun: function() {
-            bus.$emit('sendSection', this.selectedSection);
-      },
-      sendSearch: function() {
-            console.log(this.search);
-      },
+            bus.$emit('sendSectionEmit', this.selectedSection);
+
+            return this.sections;
+      }
   }
 }
 </script>
