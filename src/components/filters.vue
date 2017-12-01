@@ -5,7 +5,7 @@
             <select v-model="selectedSection">
                 <option v-for="section in sendSelectionFun">{{section}}</option>
             </select>
-            <input v-model="search" type="text" placeholder="search blogs">
+            <input v-on="sendSearch" v-model="search" type="text" placeholder="search blogs">
         </div>
     </div>
 </template>
@@ -28,6 +28,9 @@ export default {
             bus.$emit('sendSectionEmit', this.selectedSection);
 
             return this.sections;
+      },
+      sendSearch: function() {
+          bus.$emit('sendSearchEmit', this.search);
       }
   }
 }
