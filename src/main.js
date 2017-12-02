@@ -5,9 +5,11 @@ import VueRouter from 'vue-router'
 import App from './App.vue'
 import Routes from './js/routes'
 import swal from 'sweetalert'
+import infiniteScroll from 'vue-infinite-scroll'
 
 Vue.use(VueAxios, axios);
 Vue.use(VueRouter);
+Vue.use(infiniteScroll);
 
 const router = new VueRouter({
   routes: Routes,

@@ -4,7 +4,14 @@
         <div class="image" v-bind:style="{ backgroundImage: 'url(' + blog.image_url + ')'}"></div>
         <h2>{{blog.title}}</h2>
         <p>{{blog.abstract}}</p>
+      </div> 
+      
+      <div class="fullWidth" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
+          <slot v-if="spinner"></slot>
       </div>
+      <transition name="fade-slow">
+      <div v-if="end" class="noData">No more data</div>
+      </transition>
     </main>
 </template>
 
@@ -24,13 +31,19 @@ export default {
             blogs: [],
             spinner: true,
             category: 'home',
-            searchString: ''
+            searchString: '',
+            busy: false,
+            counter: 0,
+            end: false
         }
     },
     created() {
-        this.getPosts('home');
         bus.$on('sendSectionEmit', (data) => {
+            this.end = false;
+            this.busy = false;
+            this.counter = 0;
             this.category = data;
+            this.blogs = [];
             this.getPosts(this.category);
         });
 
@@ -44,10 +57,30 @@ export default {
             var url = buildUrl(section);
             this.axios.get(url)
             .then((response) => {
-                this.blogs = response.data.results;
+                //send to parent that it's loaded
+                this.$emit('appOn', true);
+
+                var arrLength = response.data.results.length;      
+                for (var i = 0, j = 4; i < j; i++) {
+                    if(this.counter < arrLength) {
+                        this.spinner = false;
+                        this.busy = false;
+                        this.blogs.push(response.data.results[this.counter]);
+                        this.counter++;
+                    } else {
+                        this.end = true;
+                        this.spinner = false;
+                        this.busy = true;
+                    }
+                }                 
+
             })
             .catch( error => {swal("There is an error with loading data");
             });
+        },
+        loadMore: function() {
+            this.spinner = true;
+            this.getPosts(this.category);
         }
     },
     computed: {
@@ -81,6 +114,26 @@ export default {
     border: 2px solid hsl(0, 0%, 67%);
 }
 
+.fullWidth {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.noData {
+    padding: 1rem;
+    border: 1px solid hsl(0, 0%, 67%);
+    width: 50%;
+    text-align: center;
+    background-color: hsl(153, 65%, 92%);
+}
+
+.fade-slow-enter-active{
+    transition: opacity 3s;
+}
+.fade-slow-enter,
+.fade-slow-leave-to {
+    opacity: 0;
+}
+
 </style>
-
-

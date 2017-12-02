@@ -1,14 +1,25 @@
 <template>
-  <div class="wrapper">
+<div>
+    <div id="loaderApp" v-show="!appOn">
+      <div class="center">
+        <spinner></spinner>
+        <p>Loading your sweet app</p>
+      </div>
+    </div>
+
+    <div class="wrapper" v-show="appOn">
       <app-header></app-header>
       <app-nav v-on:routeState="reciveData($event)"></app-nav>
       <filters v-if="routeState"></filters>
       <transition name="addBlog">
-        <router-view>
-          <spinner></spinner>
-        </router-view>
+        <keep-alive>
+          <router-view v-on:appOn="switchApp($event)">
+            <spinner></spinner>
+          </router-view>
+        </keep-alive>
       </transition>
       <app-footer></app-footer>
+    </div>
   </div>
 </template>
 
@@ -34,12 +45,18 @@ export default {
   },
   data () {
     return {
-      routeState: true
+      routeState: true,
+      appOn: false
     }
   },
   methods: {
-    reciveData: function(par){
-      this.routeState = par;
+    reciveData: function(param){
+      this.routeState = param;
+    },
+    switchApp: function(param){
+      setTimeout(() => {
+         this.appOn = param;
+      }, 2000);
     }
   }
 }
@@ -48,6 +65,17 @@ export default {
 <style lang="scss">
 @import './scss/main.scss';
 
+//loaderApp
+#loaderApp {
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  background-color: hsl(0, 0%, 15%);
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 // Slide Fade
 .addBlog-enter-active,
