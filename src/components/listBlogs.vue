@@ -1,9 +1,11 @@
 <template>
   <main>
       <div class="blog" v-for="blog in processedPosts">
-        <div class="image" v-bind:style="{ backgroundImage: 'url(' + blog.image_url + ')'}"></div>
-        <h2>{{blog.title}}</h2>
-        <p>{{blog.abstract}}</p>
+        <router-link v-bind:to="'/blog/' + blog.short_url.substr(16)">
+            <div class="image" v-bind:style="{ backgroundImage: 'url(' + blog.image_url + ')'}"></div>
+            <h2>{{blog.title}}</h2>
+            <p>{{blog.abstract}}</p>
+        </router-link>
       </div> 
       
       <div class="fullWidth" v-infinite-scroll="loadMore" infinite-scroll-disabled="busy" infinite-scroll-distance="0">
