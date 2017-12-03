@@ -3,7 +3,7 @@
     <div>
         <h1>VUE JS BLOG</h1>
         <div class="quote-refresh" v-on:click="refresh">
-            <q v-bind:class="{animated: this.on, fadeOutUp: this.on}">{{quote}}</q>
+            <q v-bind:class="{animated: this.on, fadeOutUp: this.on}">{{quote.quote}}</q>
         </div>
     </div>
 </header>
@@ -19,7 +19,7 @@ export default {
   },
   methods: {
       refresh: function(){
-          this.axios.get('https://vue-blog-9c313.firebaseio.com/quotes.json')
+          this.axios.get('https://talaikis.com/api/quotes/')
           .then((response) => {
             this.on = true;
             var here = this;
@@ -39,7 +39,7 @@ export default {
       }
   },
   created() {
-      this.axios.get('https://vue-blog-9c313.firebaseio.com/quotes.json')
+      this.axios.get('https://talaikis.com/api/quotes/')
       .then((response) => {
             var array = response.data;
             var length = array.length;
@@ -61,5 +61,4 @@ export default {
 header, .quote-refresh {
     transition: all 1s ease-in-out;
 }
-
 </style>
