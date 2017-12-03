@@ -3,7 +3,7 @@ import addBlog from '../components/addBlog';
 import singlePage from '../components/singlePage'
 
 export default [
-    {path: '/', component: listBlogs},
-    {path: '/add-blog', component: addBlog},
-    {path: '/blog/:id', component: singlePage}
+    {path: 'https://superherowebdev.github.io/VueLearn-01/', component: listBlogs},
+    {path: 'https://superherowebdev.github.io/VueLearn-01/add-blog', component: addBlog},
+    {path: 'https://superherowebdev.github.io/VueLearn-01/blog/:id', component: singlePage}
 ]
