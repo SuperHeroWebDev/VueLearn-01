@@ -6,7 +6,7 @@ Special thanks goes out to [the net ninja](https://www.thenetninja.co.uk/) and m
 You can check out the live version here: https://superherowebdev.github.io/VueLearn-01/
 
 ### Features:
-- change header quotes
+- click to change header quotes
 - view articles via nytimes api
 - add dummy blogs
 - search and browse categories
