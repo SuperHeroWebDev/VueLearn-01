@@ -92,7 +92,7 @@ export default {
             posts.map(post => {
                 var imgObj = post.multimedia
                 .find(media => media.format === 'superJumbo');
-                post.image_url = imgObj ? imgObj.url : 'http://placehold.it/500x120?text=N/A'
+                post.image_url = imgObj ? imgObj.url : 'https://placehold.it/500x120?text=N/A'
             });
 
             return posts.filter((item) => {
