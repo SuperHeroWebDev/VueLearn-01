@@ -30,7 +30,7 @@ export default {
             return this.sections;
       },
       sendSearch: function() {
-          bus.$emit('sendSearchEmit', this.search);
+          bus.$emit('sendSearchEmit', this.search.toLowerCase());
       }
   }
 }
